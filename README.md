@@ -3,32 +3,31 @@ Tools of stLFR(Single Tube Long Fragment Reads) Resequencing data analysis.
 
 Introduction
 ----------------
-Tools of stLFR(Single Tube Long Fragment Reads) data analysis.
-
-stLFR FAQs is directed to bgi-MGITech_Bioinfor@genomics.cn.
+    Tools of stLFR(Single Tube Long Fragment Reads) data analysis.
+    stLFR FAQs is directed to bgi-MGITech_Bioinfor@genomics.cn.
 
 Versions
 ----------------
-  V1.3, 17/08/2020
-  1. fix some bugs in result representation
-  2. introduce smoove for SV detection
-  3. publish on Docker only
+    V1.3, 17/08/2020
+      1. fix some bugs in result representation
+      2. introduce smoove for SV detection
+      3. publish on Docker only
   
-  V1.2, 14/07/2020
-  https://github.com/MGI-tech-bioinformatics/stLFR_V1.2
+    V1.2, 14/07/2020
+      https://github.com/MGI-tech-bioinformatics/stLFR_V1.2
 
 Setup
 ----------------
-  1. Install docker follow the official website
+    1. Install docker follow the official website
       https://www.docker.com/
-  2. Then do the following for the workflow:
+    2. Then do the following for the workflow:
       docker pull rjunhua/stlfr_reseq:v1.3
-  3. Download and unzip the database
+    3. Download and unzip the database
       From BGI Cloud Drive:
         https://pan.genomics.cn/ucdisk/s/Jvmuii
       Or from OneDrive:
         https://dwz.cn/ZPlGA0eJ
-  Notes:
+    Notes:
       1. Please make sure that you run the docker container with at least 45GB memory and 30 CPU.
       2. The input is sample list and output directory which descripted below (Main progarm arguments).
       3. The log files and temp results are all left, so the memory must be double-checked.
@@ -100,7 +99,8 @@ Result
 
 Additional Information
 ----------------
-1. If user has "Permission denied" problem in the process of running，you can use the command "chmod +x -R stLFR_v2.1/tools" to get executable permission of tools.
+    We provide stLFR_ReSeq workflow by Docker since stLFR_ReSeq_v1.3. 
+    If docker is not aviable, please try stLFR_V1.2 (https://github.com/MGI-tech-bioinformatics/stLFR_V1.2) or contact us for more information.
 
 License
 ----------------
