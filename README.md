@@ -30,7 +30,7 @@ Setup
     Notes:
       1. Please make sure that you run the docker container with at least 45GB memory and 30 CPU.
       2. The input is sample list and output directory which descripted below (Main progarm arguments).
-      3. The log files and temp results are all left, so the memory must be double-checked.
+      3. The log files and temp results will not be removed now, so the memory must be double-checked.
     
   Running
   ----------------
