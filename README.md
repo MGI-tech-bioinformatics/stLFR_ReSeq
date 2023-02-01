@@ -40,7 +40,7 @@ Running
       (c) $RESULT_LOCAL: directory for result.
     2. Run the command:
         docker run -d -P --name $STLFRNAME \
-	-v $DB_LOCAL:/stLFR/db -v $DATA_LOCAL:$DATA_LOCAL -v $RESULT_LOCAL:$RESULT_LOCAL \
+        -v $DB_LOCAL:/stLFR/db -v $DATA_LOCAL:$DATA_LOCAL -v $RESULT_LOCAL:$RESULT_LOCAL \
         rjunhua/stlfr_reseq:v1.4 /stLFR/bin/stLFR -l $DATA_LOCAL/samplelist -o $RESULT_LOCAL
     3. After report is generated:
         docker rm $STLFRNAME
