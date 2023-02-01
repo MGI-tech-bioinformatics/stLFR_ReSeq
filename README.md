@@ -8,32 +8,30 @@ Introduction
 
 Versions
 ----------------
-    V1.3, 17/08/2020
-      1. fix some bugs in result representation
-      2. introduce smoove for SV detection
-      3. publish on Docker only
-  
-    V1.2, 14/07/2020
-      https://github.com/MGI-tech-bioinformatics/stLFR_V1.2
+    V1.4
 
 Setup
 ----------------
     1. Install docker follow the official website
       https://www.docker.com/
     2. Then do the following for the workflow:
-      docker pull rjunhua/stlfr_reseq:v1.3
+      docker pull rjunhua/stlfr_reseq:v1.4
     3. Download and unzip the database
       From BGI Cloud Drive:
         https://pan.genomics.cn/ucdisk/s/Jvmuii
       Or from OneDrive:
         https://dwz.cn/ZPlGA0eJ
+      After downloading, please check the file integrity through the .md5 file first via using md5sum command:
+         md5sum db.tar.md5
+	  If the md5 check is passed, then unzip it via following command:
+	     tar -xf db.tar.gz
     Notes:
-      1. Please make sure that you run the docker container with at least 45GB memory and 30 CPU.
+      1. Please make sure that you run the docker container with at least 45GB memory and 15 CPU.
       2. The input is sample list and output directory which descripted below (Main progarm arguments).
       3. The log files and temp results will not be removed now, so the memory must be double-checked.
     
-  Running
-  ----------------
+Running
+----------------
     1. Please set the following variables on your machine:
       (a) $DB_LOCAL: directory on your local machine that has the database files.
       (b) $DATA_LOCAL: directory on your local machine that has the sequence data and "samplelist" file.
@@ -46,21 +44,26 @@ Setup
         -v $DB_LOCAL:/stLFR/db \
         -v $DATA_LOCAL:$DATA_LOCAL \
         -v $RESULT_LOCAL:$RESULT_LOCAL \
-        rjunhua/stlfr_reseq:v1.3 \
-        /bin/bash \
-        /stLFR/bin/stLFR_SGE \
-        $DATA_LOCAL/samplelist \
-        $RESULT_LOCAL
+        rjunhua/stlfr_reseq:v1.4 \
+        /stLFR/bin/stLFR \
+        -l $DATA_LOCAL/samplelist \
+        -o $RESULT_LOCAL
     3. After report is generated:
         docker rm $STLFRNAME
 
+Usage
+----------------
+    1. Run the command:
+    docker run -P -v $DB_LOCAL:/stLFR/db --name usage rjunhua/stlfr_reseq:v1.4 /stLFR/bin/stLFR
+    2. Then, you will get the usage on screen:
+    ![image](https://user-images.githubusercontent.com/48011381/215933634-e6d91eaa-c2fd-43d0-9c94-1218561d6500.png)
+    3. Finish docker:
+    docker rm usage
+
 Demo data
 ----------------
-    two demo stLFR libraries are provided for testing, and every library consists two lanes:
-      1. T0001-2:
-            http://ftp.cngb.org/pub/CNSA/data1/CNP0000387/CNS0057111/
-      2. T0001-4:
-            http://ftp.cngb.org/pub/CNSA/data1/CNP0000387/CNS0094773/
+    The demo data for stLFR library can be found in the link below:
+        https://db.cngb.org/search/project/CNP0003896/
 
 Input: Sample List
 ----------------
@@ -97,11 +100,66 @@ Result
       16. Fragment per barcode distribution figure: *.frag_per_barcode.pdf
       17. variant CIRCOS:                           *.circos.svg, *.circos.png, *.legend_circos.pdf
 
+    Meanwhile, the following shows the directory structure when the process is executed:
+       |-- 01.filter   // for align
+       |   |__ SAMPLE
+       |       |__ SAMPLE.clean_1.fq.gz
+       |       |__ SAMPLE.clean_2.fq.gz
+       |-- 02.align    // for phase, cnv and sv
+       |   |__ SAMPLE
+       |       |__ SAMPLE.sortdup.bqsr.bam
+       |       |__ SAMPLE.sortdup.bqsr.bam.bai
+       |       |__ SAMPLE.sortdup.bqsr.bam.HaplotypeCaller.vcf.gz
+       |       |__ SAMPLE.sortdup.bqsr.bam.HaplotypeCaller.vcf.gz.tbi
+       |-- 03.phase    // for cnv
+       |   |__ SAMPLE
+       |       |__ phasesplit
+       |           |__ hapblock_SAMPLE_CHROMOSOM
+       |-- 04.cnv
+       |   |__ SAMPLE
+       |       |__ SAMPLE.CNV.result.xls
+       |-- 05.sv
+       |   |__ SAMPLE
+       |       |__ SAMPLE.SVresult.xls
+       |__ file
+           |__ SAMPLE
+               |-- alignment
+               |   |__ SAMPLE.sortdup.bqsr.bam
+               |   |__ SAMPLE.sor
+               |-- CNV
+               |   |__ SAMPLE.CNV.result.xls
+               |-- haplotype
+               |   |__ SAMPLE.hapblock
+               |-- sequence
+               |   |__ SAMPLE.clean_1.fq.gz
+               |   |__ SAMPLE.clean_2.fq.gz
+               |-- SV
+               |   |__ SAMPLE.SV.result.xls
+               |__ variant
+                   |__ SAMPLE.sortdup.bqsr.bam.HaplotypeCaller.vcf.gz
+
 Additional Information
 ----------------
-    We provide stLFR_ReSeq workflow by Docker since stLFR_ReSeq_v1.3. 
-    If docker is not aviable, please try stLFR_V1.2 (https://github.com/MGI-tech-bioinformatics/stLFR_V1.2) or contact us for more information.
+    We provide stLFR_ReSeq workflow by Docker since stLFR_V1.3.
+    If you like to use clean FASTQ files to run other pipelines or software, you need to set -analysis parameter of docker running to filtefilter:	
+    docker run -d -P \
+        --name $STLFRNAME \
+        -v $DB_LOCAL:/stLFR/db \
+        -v $DATA_LOCAL:$DATA_LOCAL \
+        -v $RESULT_LOCAL:$RESULT_LOCAL \
+        rjunhua/stlfr_reseq:v1.4 \
+        /stLFR/bin/stLFR \
+        -l $DATA_LOCAL/samplelist \
+        -o $RESULT_LOCAL -analysis filter
+        
+	Then you will get the FASTQ files from subdirectory(named after sample name) in the 01.filter/ directory of result, such as:
+   
+   |-- 01.filter/ 
+       |__ SAMPLE/
+           |__ SAMPLE.clean_1.fq.gz
+           |__ SAMPLE.clean_2.fq.gz
 
+           
 License
 ----------------
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions： 
