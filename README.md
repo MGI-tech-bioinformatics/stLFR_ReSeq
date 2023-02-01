@@ -39,15 +39,9 @@ Running
           and the *PATH* in "samplelist" must be absolute dicrtory of $DATA_LOCAL.
       (c) $RESULT_LOCAL: directory for result.
     2. Run the command:
-        docker run -d -P \
-        --name $STLFRNAME \
-        -v $DB_LOCAL:/stLFR/db \
-        -v $DATA_LOCAL:$DATA_LOCAL \
-        -v $RESULT_LOCAL:$RESULT_LOCAL \
-        rjunhua/stlfr_reseq:v1.4 \
-        /stLFR/bin/stLFR \
-        -l $DATA_LOCAL/samplelist \
-        -o $RESULT_LOCAL
+        docker run -d -P --name $STLFRNAME \
+	-v $DB_LOCAL:/stLFR/db -v $DATA_LOCAL:$DATA_LOCAL -v $RESULT_LOCAL:$RESULT_LOCAL \
+        rjunhua/stlfr_reseq:v1.4 /stLFR/bin/stLFR -l $DATA_LOCAL/samplelist -o $RESULT_LOCAL
     3. After report is generated:
         docker rm $STLFRNAME
 
@@ -58,14 +52,12 @@ Usage
     2. Then, you will get the usage on screen:
         NAME
     	  stLFR - process stLFR data
-
   	SYNOPSIS
       	  stLFR [options]
       	  # run with default options
       	  stLFR -l SAMPLELIST
       	  # brief help
       	  stLFR -h
-
   	OPTIONS
 	    Sample List
 	      -list FILE
@@ -79,7 +71,6 @@ Usage
                   5. vcffile : dbsnp file, default  is NULL or '-'
                   6. blacklist : black list file(BED format) for SV
                   7. controllist : sorted control list file(BEDPE format) for SV
-		  
 	  Output Directory
 	      -outputdir [ ./stLFR_out ]
                   Output directiry path.
@@ -96,7 +87,7 @@ Usage
                   2. base   = filter + align + phase
 	      -cpu [ 15 ]
                   CPU number   
-	  Usage
+	   Usage
 	      -help       Show brief usage synopsis.
 	      -notrun     Don not run workflow after main shells built.
     3. Finish docker:
