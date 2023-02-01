@@ -28,7 +28,7 @@ Setup
       Or from OneDrive:
         https://dwz.cn/ZPlGA0eJ
       After downloading, please check the file integrity through the .md5 file first via using md5sum command:
-         md5sum db.tar.md5
+         md5sum -c db.tar.md5
 	  If the md5 check is passed, then unzip it via following command:
 	     tar -xf db.tar.gz
     Notes:
