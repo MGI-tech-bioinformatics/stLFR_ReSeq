@@ -9,6 +9,12 @@ Introduction
 Versions
 ----------------
     V1.4
+    Updates:
+	1. Use a new program that can bring 3-5 times efficiency improvement for barcode splitting
+	2. Upgrade SOAPnuke (v2.1.7) to improve operating efficiency
+	3. Optimize the operation mode and provide help information
+	4. Repair haplotype visualization graphics BUG
+	5. Added hg38 option for human sample
 
 Setup
 ----------------
