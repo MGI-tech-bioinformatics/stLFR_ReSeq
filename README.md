@@ -54,11 +54,53 @@ Running
 Usage
 ----------------
     1. Run the command:
-    docker run -P -v $DB_LOCAL:/stLFR/db --name usage rjunhua/stlfr_reseq:v1.4 /stLFR/bin/stLFR
+        docker run -P -v $DB_LOCAL:/stLFR/db --name usage rjunhua/stlfr_reseq:v1.4 /stLFR/bin/stLFR
     2. Then, you will get the usage on screen:
-    ![image](https://user-images.githubusercontent.com/48011381/215933634-e6d91eaa-c2fd-43d0-9c94-1218561d6500.png)
+        NAME
+    	  stLFR - process stLFR data
+
+  	SYNOPSIS
+      	  stLFR [options]
+      	  # run with default options
+      	  stLFR -l SAMPLELIST
+      	  # brief help
+      	  stLFR -h
+
+  	OPTIONS
+	    Sample List
+	      -list FILE
+                  Name of input file. This is required.
+
+                  Seven columns in the list file, which the front three columns are required:
+                  1. name    : unique sample ID in this analysis
+                  2. path    : fastq path(s) for this sample split with colon(:)
+                  3. barcode : sample-barcode for each path split with colon(:), 0 means all used
+                  4. reffile : reference with index, inner options are 'hg19','hs37d5' and 'hg38', NULL or '-' means 'hs37d5'
+                  5. vcffile : dbsnp file, default  is NULL or '-'
+                  6. blacklist : black list file(BED format) for SV
+                  7. controllist : sorted control list file(BEDPE format) for SV
+		  
+	  Output Directory
+	      -outputdir [ ./stLFR_out ]
+                  Output directiry path.
+	  stLFR barcode position
+	      -position [ 201_10,217_10,233_10 ]
+                  Position of stLFR barcodes on read2.
+  	  Align Software
+	      -analysis [ all ]
+                  Workflow of analysis, default = all
+                  There are 'filter', 'align', 'phase' and 'cnvsv' in this software,
+                    you can set 'filter' for running filtration only,
+                    or 'all', 'base' for more steps:
+                  1. all    = filter + align + phase + cnvsv
+                  2. base   = filter + align + phase
+	      -cpu [ 15 ]
+                  CPU number   
+	  Usage
+	      -help       Show brief usage synopsis.
+	      -notrun     Don not run workflow after main shells built.
     3. Finish docker:
-    docker rm usage
+        docker rm usage
 
 Demo data
 ----------------
@@ -152,13 +194,11 @@ Additional Information
         -l $DATA_LOCAL/samplelist \
         -o $RESULT_LOCAL -analysis filter
         
-	Then you will get the FASTQ files from subdirectory(named after sample name) in the 01.filter/ directory of result, such as:
-   
-   |-- 01.filter/ 
-       |__ SAMPLE/
-           |__ SAMPLE.clean_1.fq.gz
-           |__ SAMPLE.clean_2.fq.gz
-
+    Then you will get the FASTQ files from subdirectory(named after sample name) in the 01.filter/ directory of result, such as:
+       |-- 01.filter/ 
+           |__ SAMPLE/
+               |__ SAMPLE.clean_1.fq.gz
+               |__ SAMPLE.clean_2.fq.gz
            
 License
 ----------------
