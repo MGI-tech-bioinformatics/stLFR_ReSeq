@@ -69,7 +69,7 @@ Usage
 	      -list FILE
                   Name of input file. This is required.
 
-                  Seven columns in the list file, which the front three columns are required:
+                  Five columns in the list file, which the front three columns are required:
                   1. name    : unique sample ID in this analysis
                   2. path    : fastq path(s) for this sample split with colon(:)
                   3. barcode : sample-barcode for each path split with colon(:), 0 means all used
