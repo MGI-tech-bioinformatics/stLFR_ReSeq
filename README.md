@@ -32,7 +32,7 @@ Setup
 	  If the md5 check is passed, then unzip it via following command:
 	     tar -xf db.tar.gz
     Notes:
-      1. Please make sure that you run the docker container with at least 45GB memory and 15 CPU.
+      1. Please make sure that you run the docker container with at least 45GB memory and 30 CPU.
       2. The input is sample list and output directory which descripted below (Main progarm arguments).
       3. The log files and temp results will not be removed now, so the memory must be double-checked.
     
@@ -91,7 +91,7 @@ Usage
                     or 'all', 'base' for more steps:
                   1. all    = filter + align + phase + cnvsv
                   2. base   = filter + align + phase
-	      -cpu [ 15 ]
+	      -cpu [ 30 ]
                   CPU number   
 	   Usage
 	      -help       Show brief usage synopsis.
