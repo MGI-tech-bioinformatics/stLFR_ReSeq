@@ -26,7 +26,7 @@ Setup
       From BGI Cloud Drive:
         https://pan.genomics.cn/ucdisk/s/Jvmuii
       Or from OneDrive:
-        https://dwz.cn/ZPlGA0eJ
+        ... INCOMMING ...
       After downloading, please check the file integrity through the .md5 file first via using md5sum command:
          md5sum -c db.tar.md5
 	  If the md5 check is passed, then unzip it via following command:
