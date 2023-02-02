@@ -3,7 +3,7 @@ Tools of stLFR(Single Tube Long Fragment Reads) Resequencing data analysis.
 
 Introduction
 ----------------
-    Tools of stLFR(Single Tube Long Fragment Reads) data analysis.
+    Tools of stLFR (Single Tube Long Fragment Reads) data analysis.
     stLFR FAQs is directed to bgi-MGITech_Bioinfor@genomics.cn.
 
 Versions
@@ -179,7 +179,6 @@ Result
 
 Additional Information
 ----------------
-    We provide stLFR_ReSeq workflow by Docker since stLFR_V1.3.
     If you like to use clean FASTQ files to run other pipelines or software, you need to set -analysis parameter of docker running to filtefilter:	
     docker run -d -P \
         --name $STLFRNAME \
