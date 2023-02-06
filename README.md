@@ -24,9 +24,9 @@ Setup
       docker pull rjunhua/stlfr_reseq:v1.4
     3. Download and unzip the database
       From BGI Cloud Drive:
-        https://pan.genomics.cn/ucdisk/s/3EFrmm
+        https://pan.genomics.cn/ucdisk/s/32UJzu
       Or from OneDrive:
-        ... INCOMMING ...
+        https://bgitech-my.sharepoint.com/:f:/g/personal/liangxinming_genomics_cn/EjiKGx6CN9tOjN08zWgY5DIBoSoERFT6IgZ8ZUqpl2vXdg?e=L4W37w
       After downloading, please check the file integrity through the .md5 file first via using md5sum command:
          md5sum -c db.tar.md5
 	  If the md5 check is passed, then unzip it via following command:
