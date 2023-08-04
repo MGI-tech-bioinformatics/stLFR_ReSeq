@@ -71,7 +71,7 @@ Usage
 
                   Five columns in the list file, which the front three columns are required:
                   1. name    : unique sample ID in this analysis
-                  2. path    : fastq path(s) for this sample split with colon(:)
+                  2. path    : fastq directory path(s) for this sample split with colon(:)
                   3. barcode : sample-barcode for each path split with colon(:), 0 means all used
                   4. reffile : reference with index, inner options are 'hg19','hs37d5' and 'hg38', NULL or '-' means 'hs37d5'
                   5. vcffile : dbsnp file, default  is NULL or '-'
